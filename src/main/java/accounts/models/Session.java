@@ -1,6 +1,9 @@
 package accounts.models;
 
+import accounts.utils.Tools;
 import com.couchbase.client.java.document.json.JsonObject;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.Date;
 
 /**
@@ -18,6 +21,19 @@ public class Session {
    * @param user - The owning user of this session
    */
   public Session(User user) {
+
+    /* Session Token */
+    StringBuilder SB = new StringBuilder();
+    SB.append(Tools.encryptUUID(user.getUuid()));
+    SB.append(Tools.urlSafeRandomToken());
+    this.sessionToken = SB.toString();
+
+    /* Expires At */
+    LocalDate nextWeek = LocalDate.now().plus(1, ChronoUnit.WEEKS);
+    this.expiresAt = java.sql.Date.valueOf(nextWeek);
+
+    /* Update Token */
+    this.sessionToken = Tools.urlSafeRandomToken();
 
   }
 

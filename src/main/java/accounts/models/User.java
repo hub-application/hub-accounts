@@ -61,6 +61,34 @@ public class User {
     return result;
   }
 
+  public UUID getUuid() {
+    return uuid;
+  }
+
+  public String getHandle() {
+    return handle;
+  }
+
+  public String getFacebookID() {
+    return facebookID;
+  }
+
+  public String getSpotifyID() {
+    return spotifyID;
+  }
+
+  public Integer getSoundcloudID() {
+    return soundcloudID;
+  }
+
+  public Boolean getGuest() {
+    return isGuest;
+  }
+
+  public Session getSession() {
+    return session;
+  }
+
   /**
    * Hub user builder
    */

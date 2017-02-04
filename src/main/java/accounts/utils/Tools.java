@@ -1,5 +1,6 @@
 package accounts.utils;
 
+
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 import java.security.Key;
@@ -69,15 +70,33 @@ public class Tools {
     return token;
   }
 
-
-  public static String encryptUUID() {
-    // TODO
-    return null;
+  /**
+   * Encrypt UUID to String
+   * @return - String
+   */
+  public static String encryptUUID(UUID uuid) {
+    try {
+      byte[] encrypted = getEncryptionCipher().doFinal(uuid.toString().getBytes());
+      return new String(encrypted);
+    } catch (Exception e) {
+      e.printStackTrace();
+      return null;
+    }
   }
 
-  public static UUID decryptUUID() {
-    // TODO
-    return null;
+  /**
+   * Decrypt String to UUID
+   * @param uuidS - String
+   * @return - UUID
+   */
+  public static UUID decryptUUID(String uuidS) {
+    try {
+      String decrypted = new String(getDecryptionCipher().doFinal(uuidS.getBytes()));
+      return UUID.fromString(decrypted);
+    } catch (Exception e) {
+      e.printStackTrace();
+      return null;
+    }
   }
 
 }

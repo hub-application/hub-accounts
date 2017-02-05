@@ -2,6 +2,8 @@ package accounts.models;
 
 import accounts.utils.Tools;
 import com.couchbase.client.java.document.json.JsonObject;
+import lombok.Getter;
+
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
@@ -12,9 +14,9 @@ import java.util.Date;
 public class Session {
 
   /* Fields */
-  private String sessionToken;
-  private Date expiresAt;
-  private String updateToken;
+  @Getter private String sessionToken;
+  @Getter private Date expiresAt;
+  @Getter private String updateToken;
 
   /**
    * Standard constructor

@@ -2,6 +2,7 @@ package accounts.models;
 
 import com.couchbase.client.java.document.json.JsonObject;
 import com.fasterxml.uuid.Generators;
+import lombok.Getter;
 
 import java.util.UUID;
 
@@ -10,13 +11,13 @@ import java.util.UUID;
  */
 public class User {
 
-  private UUID uuid;
-  private String handle;
-  private String facebookID;
-  private String spotifyID;
-  private Integer soundcloudID;
-  private Boolean isGuest;
-  private Session session;
+  @Getter private UUID uuid;
+  @Getter private String handle;
+  @Getter private String facebookID;
+  @Getter private String spotifyID;
+  @Getter private Integer soundcloudID;
+  @Getter private Boolean isGuest;
+  @Getter private Session session;
 
   /**
    * Constructor from UserBuilder
@@ -59,34 +60,6 @@ public class User {
     if (spotifyID != null) { result.put("spotify_id", spotifyID); }
     if (soundcloudID != null) { result.put("soundcloud_id", soundcloudID); }
     return result;
-  }
-
-  public UUID getUuid() {
-    return uuid;
-  }
-
-  public String getHandle() {
-    return handle;
-  }
-
-  public String getFacebookID() {
-    return facebookID;
-  }
-
-  public String getSpotifyID() {
-    return spotifyID;
-  }
-
-  public Integer getSoundcloudID() {
-    return soundcloudID;
-  }
-
-  public Boolean getGuest() {
-    return isGuest;
-  }
-
-  public Session getSession() {
-    return session;
   }
 
   /**

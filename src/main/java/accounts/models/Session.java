@@ -1,6 +1,7 @@
 package accounts.models;
 
-import accounts.utils.Tools;
+import accounts.utils.Crypto;
+import accounts.utils.TokenGenerator;
 import com.couchbase.client.java.document.json.JsonObject;
 import lombok.Getter;
 
@@ -26,8 +27,8 @@ public class Session {
 
     /* Session Token */
     StringBuilder SB = new StringBuilder();
-    SB.append(Tools.encryptUUID(user.getUuid()));
-    SB.append(Tools.urlSafeRandomToken());
+    SB.append(Crypto.encryptUUID(user.getUuid()));
+    SB.append(TokenGenerator.urlSafeRandomToken());
     this.sessionToken = SB.toString();
 
     /* Expires At */
@@ -35,7 +36,7 @@ public class Session {
     this.expiresAt = java.sql.Date.valueOf(nextWeek);
 
     /* Update Token */
-    this.sessionToken = Tools.urlSafeRandomToken();
+    this.sessionToken = TokenGenerator.urlSafeRandomToken();
 
   }
 

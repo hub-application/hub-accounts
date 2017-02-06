@@ -3,12 +3,9 @@ package accounts.utils;
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 import java.security.Key;
-import java.security.SecureRandom;
-import java.util.Base64;
-import java.util.Base64.Encoder;
 import java.util.UUID;
 
-public class Tools {
+public class Crypto {
 
   /* Singletons */
   private static Cipher encryptionCipher = null;
@@ -26,7 +23,7 @@ public class Tools {
     if (cipher == null) {
       try {
         Cipher newCipher = Cipher.getInstance("AES");
-        cipher.init(mode, Tools.aesKey);
+        cipher.init(mode, Crypto.aesKey);
         return cipher;
       } catch (Exception e) {
         e.printStackTrace();
@@ -42,8 +39,8 @@ public class Tools {
    * @return - Cipher
    */
   private static Cipher getEncryptionCipher () {
-    Tools.encryptionCipher = Tools.getCipher(Tools.encryptionCipher, Cipher.ENCRYPT_MODE);
-    return Tools.encryptionCipher;
+    Crypto.encryptionCipher = Crypto.getCipher(Crypto.encryptionCipher, Cipher.ENCRYPT_MODE);
+    return Crypto.encryptionCipher;
   }
 
   /**
@@ -51,22 +48,8 @@ public class Tools {
    * @return - Cipher
    */
   private static Cipher getDecryptionCipher () {
-    Tools.decryptionCipher = Tools.getCipher(Tools.decryptionCipher, Cipher.DECRYPT_MODE);
-    return Tools.decryptionCipher;
-  }
-
-  /**
-   * Generates a URL-safe random token that's 20 bytes in size
-   * (citing: https://goo.gl/ziO6sE)
-   * @return - String (token)
-   */
-  public static String urlSafeRandomToken() {
-    SecureRandom random = new SecureRandom();
-    byte bytes[] = new byte[20];
-    random.nextBytes(bytes);
-    Encoder encoder = Base64.getUrlEncoder().withoutPadding();
-    String token = encoder.encodeToString(bytes);
-    return token;
+    Crypto.decryptionCipher = Crypto.getCipher(Crypto.decryptionCipher, Cipher.DECRYPT_MODE);
+    return Crypto.decryptionCipher;
   }
 
   /**
